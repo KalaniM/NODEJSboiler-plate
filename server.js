@@ -7,6 +7,7 @@
     const express = require('express');
     const ejs = require('ejs');
     const path = require('path');
+    const bodyParser = require('body-parser');
 
     //Module serveur
     const frontRoutes = require('./routes/front.routes');
@@ -26,6 +27,10 @@
 
     // Configuration du moteur de rendu
     server.set( 'view engine', 'ejs' );
+
+    // Configurration de body-parser
+    server.use(bodyParser.json({limit: '10mb'}));
+    server.use(bodyParser.urlencoded({ extended: true }));
 
     // Utilisation des routers
     server.use('/api', apiRoutes);
